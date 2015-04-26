@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/angular/angular.js"></script>
+   <script src="fi.js">
+   </script>
+    <script src="vb.js"></script>
+</head>
+<body ng-app="ad" ng-init="ct.name='Search for tallest boy in the class'" ng-controller="ct1 as ct">
+<input type="text" ng-model="ct.name" onclick="clea()"/>
+<ul>
+    <li ng-repeat="boy in ct.person | filter:ct.name" ng-if="boy.tall" style="background-color:red;">{{boy.pname}}</li>
+</ul>
+</body>
+</html>
