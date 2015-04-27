@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="e_n_b.js"></script>
+</head>
+<body ng-app="enb">
+<div ng-controller="mc">
+    <p ng-controller="child1">
+        <b>Assalam-o-Alaikum Iam paragraph no1 chid of div:</b><input type="text" ng-model="childName"/>
+        {{ch()}}
+    </p>
+    <p ng-controller="child2">
+        <b>Assalam-o-Alaikum Iam paragraph no2 another child of div and sibling of paragraph no1:{{$parent.cn}}</b></p>
+</div>
+</body>
+</html>

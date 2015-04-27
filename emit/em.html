@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="event_emit.js"></script>
+</head>
+<body ng-app="emt">
+<div ng-controller="mc">
+    <input type="text" ng-model="childName"/>
+    <p ng-controller="child1">
+        <input type="text" ng-model="name1"/>
+        <button ng-click="ch1()">Child 1</button>
+        Assalam-o-Alaikum Iam child 1 and I give to my parent {{name1}}
+    </p>
+    <p ng-controller="child2">
+        <input type="text" ng-model="name2"/>
+        <button ng-click="ch2()">Child 2</button>
+        Assalam-o-Alaikum Iam child 2 and I give to my parent {{name2}}
+    </p>
+</div>
+</body>
+</html>
