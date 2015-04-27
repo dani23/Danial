@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="event_bubble.js"></script>
+</head>
+<body ng-app="event">
+<div ng-controller="mc">
+    <input type="text"ng-model="userName"/>
+    <p ng-controller="child1">{{userName}}<br/>
+    Iam child 1 I recieve {{num}} and I have save my parent's first name that is {{userName}}
+    </p>
+    <p ng-controller="child2">{{userName}}
+    <br/>
+        Iam child 2 I recieve {{num}} and I have save my parent's first name that is {{userName}}
+    </p>
+    <button ng-click="num()">number passing</button>
+</div>
+</body>
+</html>
