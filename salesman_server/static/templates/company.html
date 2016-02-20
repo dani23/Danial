@@ -1,0 +1,18 @@
+<h1>Company</h1>
+<form ng-submit="addCompany()" class="formCom">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Company name</label>
+        <input ng-model="company.company_name">
+    </md-input-container>
+    <md-input-container>
+        <label>Company address</label>
+        <input ng-model="company.company_address">
+    </md-input-container>
+    <md-input-container ng-repeat="roug in roughArr" style="display: block;">
+        <label>Product {{roug}}</label>
+        <input ng-model="company.products[roug]"/>
+        <p>{{company.products[roug]}}</p>
+    </md-input-container>
+    <p>{{company.products[0]}}</p>
+    <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+</form>

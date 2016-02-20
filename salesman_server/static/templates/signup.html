@@ -1,0 +1,19 @@
+<form name="userForm" ng-submit="submitForm()">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>First name</label>
+        <input ng-model="user.Firstname" type="text"/>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Last name</label>
+        <input ng-model="user.Lastname" type="text"/>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Email</label>
+        <input ng-model="user.email" type="email"/>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Password</label>
+        <input ng-model="user.password" type="password"/>
+    </md-input-container>
+    <md-button class="md-raised" type="submit">Submit</md-button>
+</form>
