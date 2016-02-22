@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var q = require("q");
 var salesmanSchema = mongoose.Schema;
-var salesman = new salesmanSchema({salesmanName : {type : String},salesmanPassword : {type : String, required : true, unique : true}, company_id : {type : String, required : true}});
+var salesman = new salesmanSchema({salesmanName : {type : String},salesmanPassword : {type : String, required : true, unique : true}, company_id : {type : String, required : true}, companyName : {type : String}});
 var salesmanModel = mongoose.model("salesmanModel",salesman);
 function saveSalesman(salesman){
     var deffered = q.defer();
@@ -32,3 +32,16 @@ function findSalesMan(query){
     return deffered.promise;
 };
 exports.findSalesMan = findSalesMan;
+function findOneSaleMan(query){
+    var deffered = q.defer();
+    salesmanModel.findOne({salesmanName : query.salemanName,salesmanPassword : query.salemanPassword},function(err,data){
+        if(err || data == null){
+            deffered.reject(data);
+        }
+        else{
+            deffered.resolve(data);
+        }
+    });
+    return deffered.promise;
+};
+exports.findOneSaleMan = findOneSaleMan;

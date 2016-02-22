@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.14.2",
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
     "express": "^4.13.4",
     "firebase": "^2.4.0",
     "mongoose": "^4.4.3",

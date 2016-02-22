@@ -13,6 +13,10 @@ angular.module("logCont",[])
                   else{
                       alert(data['err']);
                   }
-              })
+              });
+            $scope.userlog = {
+                email : "",
+                pass : ""
+            };
         }
     })

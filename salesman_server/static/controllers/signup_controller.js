@@ -21,5 +21,11 @@ angular.module("signCont",[])
                     alert("This user already exist");
                 }
             })
+            $scope.user = {
+                Firstname : "",
+                Lastname : "",
+                email : "",
+                password : ""
+            };
         };
     })

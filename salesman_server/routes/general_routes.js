@@ -4,7 +4,17 @@ var fireRef = new Firebase("https://salesanapp-1.firebaseio.com/users");
 var adminData = require("../databases/admin_database.js");
 var companyDatabase = require("../databases/company_database.js");
 var salesmanDatabase = require("../databases/salesman_database.js");
+var productDatabase = require("../databases/products_database.js");
 var exApp = ex.Router();
+/*
+exApp.use(function(req,res,next){
+ res.append('Access-Control-Allow-Origin',req.headers.origin || '*');
+ res.append('Access-Control-Allow-Credentials','true');
+ res.append('Access-Control-Allow-Methods',['GET','OPTIONS','PUT','POST']);
+ res.append('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
+ next();
+ });
+*/
 exApp.post("/signup",function(req,res){
    fireRef.createUser({
        email : req.body.email,
@@ -66,4 +76,20 @@ exApp.get("/getSalesman",function(req,res){
         res.json(err);
     })
 });
+exApp.post("/saveProduct",function(req,res){
+    console.log("req.body from /saveProduct " + req.body);
+    productDatabase.saveProduct(req.body).then(function(data){
+        res.json(data);
+    },function(err){
+        res.json(err);
+    });
+});
+exApp.get("/getProducts",function(req,res){
+    productDatabase.findProducts(req.query.company_id).then(function(data){
+        res.json(data);
+    },function(err){
+        res.json(err);
+    })
+});
+exApp.post("/salemanLogin",function(req,res){});
 module.exports = exApp;

@@ -1,0 +1,11 @@
+{
+  "name": "my_sales_server",
+  "app_id": "",
+   "proxies": [
+      {
+        "path": "/api",
+        "proxyUrl": "http://http://localhost:5013/api"
+      }
+    ]
+
+}

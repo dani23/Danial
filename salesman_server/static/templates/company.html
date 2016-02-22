@@ -8,11 +8,6 @@
         <label>Company address</label>
         <input ng-model="company.company_address">
     </md-input-container>
-    <md-input-container ng-repeat="roug in roughArr" style="display: block;">
-        <label>Product {{roug}}</label>
-        <input ng-model="company.products[roug]"/>
-        <p>{{company.products[roug]}}</p>
-    </md-input-container>
-    <p>{{company.products[0]}}</p>
     <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+    <md-button class="md-raised md-warn" ng-click="logout()">Logout</md-button>
 </form>

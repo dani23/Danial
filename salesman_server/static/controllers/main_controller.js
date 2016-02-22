@@ -32,7 +32,7 @@ angular.module("sale",["signCont",'ui.router','ngMaterial','logCont',"hom","dash
                 }
             }
         }).state("cpn",{
-            url : "/comn/:productsNum",
+            url : "/comn",
             templateUrl : "../templates/company.html",
             controller : "CompanyController",
             resolve : {
@@ -73,6 +73,25 @@ angular.module("sale",["signCont",'ui.router','ngMaterial','logCont',"hom","dash
             url : "/currSalesman",
             templateUrl : "../templates/salesManOfCurrentCompany.html",
             controller : "salesManCurrentController",
+            resolve : {
+                getToken : function($q){
+                    var key = localStorage.getItem("company_id");
+                    var deffered = $q.defer();
+                    if(key){
+                        console.log("Access guranteed");
+                        deffered.resolve("Access guranteed");
+                    }
+                    else{
+                        console.log("Access not guranteed");
+                        deffered.reject("Access not guranteed");
+                    }
+                    return deffered.promise;
+                }
+            }
+        }).state("products",{
+            url : "/products",
+            templateUrl : "../templates/products.html",
+            controller : "ProductsController",
             resolve : {
                 getToken : function($q){
                     var key = localStorage.getItem("company_id");

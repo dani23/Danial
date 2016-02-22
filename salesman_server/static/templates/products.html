@@ -1,0 +1,43 @@
+<form ng-submit="pro()">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Product name</label>
+        <input ng-model="product.productName" type="text"/>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Product price</label>
+        <input ng-model="product.productPrice" type="number"/>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Product stock</label>
+        <input ng-model="product.productStock" type="number"/>
+    </md-input-container>
+    <md-button class="md-raised" type="submit">Add products</md-button>
+    </form>
+<md-button class="md-raised" ng-click="displayAllProducts()">Show all products</md-button>
+<div class="CSSTableGenerator" >
+    <table >
+        <tr>
+            <td>
+                Product name
+            </td>
+            <td >
+                Product price
+            </td>
+            <td>
+                Product stock
+            </td>
+            <td>
+                Company
+            </td>
+        </tr>
+        <tr ng-repeat="produ in showAllProducts">
+            <td ng-bind="produ.productName">
+            </td>
+            <td ng-bind="produ.productPrice">
+            </td>
+            <td ng-bind="produ.productStock"></td>
+            <td ng-bind="produ.company_name"></td>
+        </tr>
+    </table>
+</div>
+<md-button class="md-raised md-warn" ng-click="logout()">Logout</md-button>

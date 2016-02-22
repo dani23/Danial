@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"salesMan.salesmanmodels"},{"v":1,"unique":true,"key":{"salesmanPassword":1},"name":"salesmanPassword_1","ns":"salesMan.salesmanmodels","background":true}]}

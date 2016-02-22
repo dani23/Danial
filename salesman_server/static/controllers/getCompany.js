@@ -5,9 +5,13 @@ angular.module("getCom",[])
         localStorage.setItem("company_id",$stateParams._id);
         $http.get("/api/getCompany").success(function(data){
                $scope.companyName = data.company_name;
+            localStorage.setItem("companyName",$scope.companyName);
         }).error(function(err){
             console.log("Company not registered " + err);
         });
+        $scope.goToProducts = function(){
+            $state.go("products");
+        };
         $scope.goToSalesman = function(ev){
             var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
             $mdDialog.show({

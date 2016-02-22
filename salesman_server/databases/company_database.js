@@ -3,7 +3,6 @@ var q = require("q");
 var companySchema = mongoose.Schema;
 var company = new companySchema({company_name : {type : String},
 company_address : {type : String},
-    products : {type : Array},
     firebasetoken : {type : String}
 });
 var companyModel = mongoose.model("companyModel",company);
