@@ -1,17 +1,21 @@
 angular.module("prod",[])
 .controller("ProductsController",function($scope,$state,$http){
-
+        $scope.company_id = localStorage.getItem("company_id");
+        $scope.company_name = localStorage.getItem("companyName");
         $scope.product = {productName : "",
             productPrice : null,
             productStock : null,
-            company_id : localStorage.getItem("company_id"),
-            company_name : localStorage.getItem("companyName")
+            company_id : $scope.company_id,
+            company_name : $scope.company_name
         };
         $scope.showAllProducts;
         $scope.pro = function(){
             $http.post("/api/saveProduct",$scope.product).success(function(data){
                 if(data["pro"] == "product save"){
                   alert("product saved");
+                    $scope.product.productName = "";
+                    $scope.product.productPrice = null;
+                    $scope.product.productStock = null;
                 }
                 else{
                    alert("You havenot save any product");
@@ -25,11 +29,6 @@ angular.module("prod",[])
                     console.log("Error in finding product " + err);
                 });
             };
-            $scope.product = {productName : "",
-                productPrice : null,
-                productStock : null,
-                company_id : localStorage.getItem("company_id"),
-                company_name : localStorage.getItem("company_name")
-            };
-        }
+        };
+        console.log("Assalam-o-Alaikum");
     })

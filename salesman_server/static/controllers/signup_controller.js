@@ -14,6 +14,10 @@ angular.module("signCont",[])
                     console.log("Successfully signed up");
                     console.log("token is " + data["userData"].firebasetoken);
                     localStorage.setItem("firebasetoken",data["userData"].firebasetoken);
+                    $scope.user.Firstname = "";
+                    $scope.user.Lastname = "";
+                    $scope.user.email = "";
+                    $scope.user.password = "";
                     $state.go("dashboard");
                 }
                 else{
@@ -21,11 +25,5 @@ angular.module("signCont",[])
                     alert("This user already exist");
                 }
             })
-            $scope.user = {
-                Firstname : "",
-                Lastname : "",
-                email : "",
-                password : ""
-            };
         };
     })

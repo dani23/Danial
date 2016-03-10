@@ -30,7 +30,7 @@
                 Company
             </td>
         </tr>
-        <tr ng-repeat="produ in showAllProducts">
+        <tr ng-repeat="produ in showAllProducts track by $index">
             <td ng-bind="produ.productName">
             </td>
             <td ng-bind="produ.productPrice">

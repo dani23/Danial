@@ -2,7 +2,6 @@ var exp = require("express");
 var path = require("path");
 var mongoose = require("mongoose");
 var body = require("body-parser");
-var cors = require("cors");
 var expApp = exp();
 mongoose.connect("mongodb://localhost:27017/salesMan");
 var generalApi = require("./routes/general_routes.js");
@@ -13,7 +12,6 @@ var generalApi = require("./routes/general_routes.js");
     res.append('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
     next();
 });*/
-expApp.use(cors());
 expApp.use(body.json());
 expApp.use("/api",generalApi);
 expApp.use(exp.static(path.resolve(__dirname,"./static")));

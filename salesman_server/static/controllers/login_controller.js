@@ -8,15 +8,13 @@ angular.module("logCont",[])
               $http.post("/api/login",$scope.userlog).success(function(data){
                   if(data['firebasetoken']){
                  localStorage.setItem("firebasetoken",data['firebasetoken']);
+                      $scope.userlog.email  = "";
+                         $scope.userlog.pass  = "";
                   $state.go("dashboard");
                   }
                   else{
                       alert(data['err']);
                   }
               });
-            $scope.userlog = {
-                email : "",
-                pass : ""
-            };
         }
     })
