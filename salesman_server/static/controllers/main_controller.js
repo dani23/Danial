@@ -1,4 +1,4 @@
-angular.module("sale",["signCont",'ui.router','ngMaterial','logCont',"hom","dash_boa","compCon","getCom","comSaleman","prod","curr_salesMan"])
+angular.module("sale",["signCont",'ui.router','ngMaterial','logCont',"hom","dash_boa","compCon","getCom","comSaleman","prod","curr_salesMan","firebase"])
     .config(function($stateProvider,$httpProvider,$urlRouterProvider){
         $stateProvider.state("signup",{
             url : "/sign",

@@ -3,8 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic',"dashboa","logn"])
-  .config(function($httpProvider,$stateProvider,$urlRouterProvider){
+angular.module('starter', ['ionic',"dashboa","logn","firebase"])
+  .config(function($httpProvider,$stateProvider,$urlRouterProvider,$ionicConfigProvider){
     $httpProvider.interceptors.push(function(){
       return{
         request : function(req){
@@ -24,9 +24,9 @@ angular.module('starter', ['ionic',"dashboa","logn"])
       url : "/log",
       templateUrl : "../templates/login.html",
       controller : "LoginController"
-    }).state("dashboard",{
-      url : "/dash/:company_id",
-      templateUrl : "../templates/dashboard.html",
+    }).state("ordrFrm",{
+      url : "/ord/:company_id",
+      templateUrl : "../templates/orderForm.html",
       controller : "DashboardController",
       resolve : {
         getcompany_id : function($q,$stateParams){
@@ -44,6 +44,7 @@ angular.module('starter', ['ionic',"dashboa","logn"])
       }
     });
     $urlRouterProvider.otherwise("/log");
+    $ionicConfigProvider.views.maxCache(0);
   })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

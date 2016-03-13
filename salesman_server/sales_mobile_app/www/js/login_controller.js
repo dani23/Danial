@@ -9,7 +9,7 @@ angular.module("logn",[])
               if(companyData.success == "yes") {
                 console.log("data is " + companyData.comData);
                 console.log("company_id is " + companyData.comData.company_id);
-                $state.go("dashboard",{company_id : companyData.comData.company_id});
+                $state.go("ordrFrm",{company_id : companyData.comData.company_id});
               }
               else{
                 alert("You are not registered");

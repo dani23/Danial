@@ -96,4 +96,20 @@ exApp.post("/salemanLogin",function(req,res){
         res.json({success : "no"});
     });
 });
+exApp.post("/saveOrderProduct",function(req,res){
+    console.log("req.body from /saveOrderProduct " + req.body);
+    allDatabase.saveProductsOrder(req.body).then(function(data){
+        res.json(data);
+    },function(err){
+        res.json(err);
+    });
+});
+exApp.get("/getOrderProducts",function(req,res){
+    console.log("cross request is coming from " + req.url);
+    allDatabase.findProductOrder().then(function(data){
+        res.json(data);
+    },function(err){
+        res.json(err);
+    })
+});
 module.exports = exApp;

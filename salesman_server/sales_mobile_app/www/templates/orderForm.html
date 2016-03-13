@@ -1,0 +1,30 @@
+<ion-view view-title="Salesman app">
+<ion-nav-bar class="bar-calm">
+  <ion-nav-buttons side="right">
+    <button class="button" ng-click="logout()">Logout</button>
+  </ion-nav-buttons>
+</ion-nav-bar>
+  <ion-content>
+  <form>
+    <div class="list">
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Customer name</span>
+        <input type="text" placeholder="name" ng-model="customerOrder.customerName"/>
+      </label>
+      <p>{{customerOrder.customerName}}</p>
+      <div class="card">
+        <div class="item item-text-wrap">
+        Please select the products from below</div>
+      </div>
+        <ion-list>
+      <ion-checkbox ng-repeat="pro in displayProducts track by $index" ng-click="addPro(pro.productName,pro.productPrice,pro._id)">
+        <p>{{pro.productName}} and its price is {{pro.productPrice}} Rs</p>
+      </ion-checkbox>
+      </ion-list>
+    </div>
+    <button class="button button-balanced" ng-disabled="customerOrder.customerName == '' || customerOrder.addProducts.length == 0" ng-click="finalOrder()">
+      Final order
+    </button>
+  </form>
+</ion-content>
+</ion-view>

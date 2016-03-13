@@ -1,3 +1,23 @@
 <h1>In dashboard</h1>
 <md-button class="md-raised md-warn" ng-click="logout()">Logout</md-button>
 <md-button class="md-raised md-warn" ng-click="createCompany()">Create company</md-button>
+<!--<ul>
+    <li ng-repeat="ord in showOrders">
+        <p ng-repeat="od in ord.customerOrderProduct">{{od}}</p>
+    </li>
+</ul>-->
+<table border="1" ng-repeat="ord in showOrders">
+    <tr>
+        <td>Customer name</td>
+        <td>Product</td>
+        <td>Product price</td>
+        <td>{{ord.$id}}</td>
+        <td>Action</td>
+    </tr>
+    <tr ng-repeat="od in ord.customerOrderProduct">
+        <td>{{od.customer_name}}</td>
+        <td>{{od.proName}}</td>
+        <td>{{od.proPrice}}</td>
+        <td><md-button class="md-raised md-warn" ng-click="saveRecord(od.customer_name,od.proName,od.proPrice,ord.$id)">Save customer record of this row</md-button></td>
+    </tr>
+</table>

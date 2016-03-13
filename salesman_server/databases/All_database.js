@@ -151,3 +151,33 @@ function findOneSaleMan(query){
     return deffered.promise;
 };
 exports.findOneSaleMan = findOneSaleMan;
+var productOrderSchema = mongoose.Schema;
+var productsOrder = new productOrderSchema({customer_name : {type : String, required : true},proName : {type : String, required : true},proPrice :{type : Number, required : true}, firebase_id : {type : String, required : true, unique : true}});
+var productsOrderModel = mongoose.model("productsOrderModel",productsOrder);
+function saveProductsOrder(order){
+    var prod = new productsOrderModel(order);
+    var defferred = q.defer();
+    prod.save(function(err,data){
+        if(err || data == null){
+            defferred.reject("Order not saved");
+        }
+        else{
+            defferred.resolve("Order saved");
+        }
+    });
+    return defferred.promise;
+}
+exports.saveProductsOrder = saveProductsOrder;
+function findProductOrder(){
+    var deffered = q.defer();
+    salesmanModel.find({},function(err,data){
+        if(err || data == null){
+            deffered.reject(data);
+        }
+        else{
+            deffered.resolve(data);
+        }
+    });
+    return deffered.promise;
+};
+exports.findProductOrder = findProductOrder;
