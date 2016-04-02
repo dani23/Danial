@@ -3,30 +3,37 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic',"dashboa","logn","firebase"])
+angular.module('starter', ['ionic',"dashboa","logn","firebase","fact"])
+  .constant('Apiend',{
+    url : "http://localhost:5013/api"
+  })
   .config(function($httpProvider,$stateProvider,$urlRouterProvider,$ionicConfigProvider){
-    $httpProvider.interceptors.push(function(){
+    /*$httpProvider.interceptors.push(function(){
       return{
         request : function(req){
           if(req.url == "/api/salemanLogin"){
             console.log("req.url is " + req.url);
             req.url = "http://localhost:5013" + req.url;
+            console.log("req.url is " + req.url);
           }
           else if(req.url == "/api/getProducts?company_id=" + localStorage.getItem("company_id")){
             console.log("req.url is " + req.url);
             req.url = "http://localhost:5013" + req.url;
           }
+          else if(req.url == "/api/updateProductStock"){
+            req.url = "http://localhost:5013" + req.url;
+          }
           return req;
         }
       }
-    });
+    });*/
     $stateProvider.state("login",{
       url : "/log",
-      templateUrl : "../templates/login.html",
+      templateUrl : "templates/login.html",
       controller : "LoginController"
     }).state("ordrFrm",{
       url : "/ord/:company_id",
-      templateUrl : "../templates/orderForm.html",
+      templateUrl : "templates/orderForm.html",
       controller : "DashboardController",
       resolve : {
         getcompany_id : function($q,$stateParams){

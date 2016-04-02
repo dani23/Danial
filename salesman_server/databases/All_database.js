@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var q = require("q");
-var adminSchema = mongoose.Schema;
-var admin = new adminSchema({Firstname : String,
+var allSchema = mongoose.Schema;
+var admin = new allSchema({Firstname : String,
 Lastname : String,
     email : {type : String, unique : true, required : true},
     password : String,
@@ -39,8 +39,7 @@ function findUser(query){
     return deferred.promise;
 };
 exports.findUser = findUser;
-var companySchema = mongoose.Schema;
-var company = new companySchema({company_name : {type : String},
+var company = new allSchema({company_name : {type : String},
     company_address : {type : String},
     firebasetoken : {type : String}
 });
@@ -73,10 +72,9 @@ function findCompany(query){
         }
     });
     return deffered.promise;
-};
+}
 exports.findCompany = findCompany;
-var productsSchema = mongoose.Schema;
-var products = new productsSchema({productName : {type : String}, productPrice : {type : Number}, productStock : {type : Number}, company_id : {type : String, required : true},company_name : {type : String}});
+var products = new allSchema({productName : {type : String}, productPrice : {type : Number}, productStock : {type : Number}, company_id : {type : String, required : true},company_name : {type : String}, firebasetoken : {type : String, required : true}});
 var productsModel = mongoose.model("productsModel",products);
 function saveProduct(product){
     var pro = new productsModel(product);
@@ -106,8 +104,7 @@ function findProducts(query){
     return deferred.promise;
 };
 exports.findProducts = findProducts;
-var salesmanSchema = mongoose.Schema;
-var salesman = new salesmanSchema({salesmanName : {type : String},salesmanPassword : {type : String, required : true, unique : true}, company_id : {type : String, required : true}, companyName : {type : String}});
+var salesman = new allSchema({salesmanName : {type : String},salesmanPassword : {type : String, required : true, unique : true}, company_id : {type : String, required : true}, companyName : {type : String},firebasetoken: {type : String, required : true}});
 var salesmanModel = mongoose.model("salesmanModel",salesman);
 function saveSalesman(salesman){
     var deffered = q.defer();
@@ -123,15 +120,18 @@ function saveSalesman(salesman){
         }
     });
     return deffered.promise;
-};
+}
 exports.saveSalesman = saveSalesman;
 function findSalesMan(query){
     var deffered = q.defer();
     salesmanModel.find({company_id : query},function(err,docs){
         if(err || docs == null){
+            console.log("docs are " + docs);
             deffered.reject(docs);
         }
         else{
+            console.log("docs are " + typeof docs);
+            console.log("length docs are " +  docs.length);
             deffered.resolve(docs);
         }
     });
@@ -151,9 +151,8 @@ function findOneSaleMan(query){
     return deffered.promise;
 };
 exports.findOneSaleMan = findOneSaleMan;
-var productOrderSchema = mongoose.Schema;
-var productsOrder = new productOrderSchema({customer_name : {type : String, required : true},proName : {type : String, required : true},proPrice :{type : Number, required : true}, firebase_id : {type : String, required : true, unique : true}});
-var productsOrderModel = mongoose.model("productsOrderModel",productsOrder);
+var productsOrder = new allSchema({customer_name : {type : String, required : true},proName : {type : String, required : true},proPrice :{type : Number, required : true}, firebase_id : {type : String, required : true},companyName : {type : String, required : true},proOrderQuantity : {type : Number, required : true}});
+var productsOrderModel = mongoose.model("productsOrderModel",productsOrder,"produ");
 function saveProductsOrder(order){
     var prod = new productsOrderModel(order);
     var defferred = q.defer();
@@ -168,9 +167,9 @@ function saveProductsOrder(order){
     return defferred.promise;
 }
 exports.saveProductsOrder = saveProductsOrder;
-function findProductOrder(){
+function findProductOrder(query){
     var deffered = q.defer();
-    salesmanModel.find({},function(err,data){
+    productsOrderModel.find({firebase_id : query},function(err,data){
         if(err || data == null){
             deffered.reject(data);
         }
@@ -181,3 +180,31 @@ function findProductOrder(){
     return deffered.promise;
 };
 exports.findProductOrder = findProductOrder;
+function giveAllCompanyNames(query){
+    var defferred = q.defer();
+    companyModel.find({firebasetoken : query},function(err,data){
+        if(err || data == null){
+            console.log("You have not registered any company");
+            defferred.reject(data);
+        }
+        else{
+            console.log("You have registered company");
+            defferred.resolve(data);
+        }
+    });
+    return defferred.promise;
+}
+exports.giveAllCompanyNames = giveAllCompanyNames;
+function updateProStock(query){
+    var deffered = q.defer();
+    productsModel.update({_id : query._id},{productStock : query.productStock},function(err,data){
+        if(err || data == null){
+            deffered.reject("Product stock not updated");
+        }
+        else{
+            deffered.resolve("Product stock updated");
+        }
+    });
+    return deffered.promise;
+}
+exports.updateProStock = updateProStock;

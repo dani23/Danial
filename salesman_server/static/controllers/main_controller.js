@@ -1,5 +1,5 @@
 angular.module("sale",["signCont",'ui.router','ngMaterial','logCont',"hom","dash_boa","compCon","getCom","comSaleman","prod","curr_salesMan","firebase"])
-    .config(function($stateProvider,$httpProvider,$urlRouterProvider){
+    .config(function($stateProvider,$urlRouterProvider){
         $stateProvider.state("signup",{
             url : "/sign",
             templateUrl : "../templates/signup.html",
@@ -51,9 +51,12 @@ angular.module("sale",["signCont",'ui.router','ngMaterial','logCont',"hom","dash
                 }
             }
         }).state("getcpn",{
-            url : "/getCompn/:_id",
+            url : "/getCompn",
             templateUrl : "../templates/getCompany.html",
             controller : "GetcompanyController",
+            params : {
+                comdata : null
+            },
             resolve : {
                 getToken : function($q){
                     var token = localStorage.getItem("firebasetoken");
@@ -109,7 +112,6 @@ angular.module("sale",["signCont",'ui.router','ngMaterial','logCont',"hom","dash
             }
         });
         $urlRouterProvider.otherwise("/home");
-        $httpProvider.interceptors.push('httpinterceptor');
     }
 )
     .run(function($rootScope,$state){
@@ -121,17 +123,13 @@ angular.module("sale",["signCont",'ui.router','ngMaterial','logCont',"hom","dash
             }
         });
     })
-    .factory("httpinterceptor",function(){
-        return{
-            request : function(config){
-                if(config.url == "/api/getCompany"){
-                    var company_id = localStorage.getItem("company_id");
-                    console.log("config.url is " + config.url);
-                    config.url = config.url + "?token=" + company_id;
-                    console.log("config.url is " + config.url);
-                }
-                return config;
-            }
-        }
+    .controller("mainController",function($scope,$state,$rootScope){
+        $rootScope.comCount = 0;
+        $rootScope.compCou = 0;
+        $scope.logout = function(){
+            localStorage.removeItem("firebasetoken");
+            localStorage.removeItem("company_id");
+            localStorage.removeItem("companyName");
+            $state.go("home");
+        };
     })
-

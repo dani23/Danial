@@ -4,12 +4,12 @@ var fireRef = new Firebase("https://salesanapp-1.firebaseio.com/users");
 var allDatabase = require("../databases/All_database.js");
 var exApp = ex.Router();
 exApp.use(function(req,res,next){
-    res.append('Access-Control-Allow-Origin',req.headers.origin || '*');
-    res.append('Access-Control-Allow-Credentials','true');
-    res.append('Access-Control-Allow-Methods',['GET','OPTIONS','PUT','POST']);
-    res.append('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+ res.append('Access-Control-Allow-Origin',req.headers.origin || '*');
+ res.append('Access-Control-Allow-Credentials','true');
+ res.append('Access-Control-Allow-Methods',['GET','OPTIONS','PUT','POST']);
+ res.append('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
+ next();
+ });
 exApp.post("/signup",function(req,res){
    fireRef.createUser({
        email : req.body.email,
@@ -41,8 +41,8 @@ exApp.post("/login",function(req,res){
     });
 });
 exApp.get("/getCompany",function(req,res){
-    console.log("query is " + req.query.token);
-    allDatabase.findCompany(req.query.token).then(function(data){
+    console.log("query is " + req.query._id);
+    allDatabase.findCompany(req.query._id).then(function(data){
         console.log("company name is from /getCompany" + data.company_name);
         res.json(data);
     },function(err){
@@ -97,7 +97,7 @@ exApp.post("/salemanLogin",function(req,res){
     });
 });
 exApp.post("/saveOrderProduct",function(req,res){
-    console.log("req.body from /saveOrderProduct " + req.body);
+    console.log("req.body from /saveOrderProduct 1 " + req.body);
     allDatabase.saveProductsOrder(req.body).then(function(data){
         res.json(data);
     },function(err){
@@ -106,10 +106,25 @@ exApp.post("/saveOrderProduct",function(req,res){
 });
 exApp.get("/getOrderProducts",function(req,res){
     console.log("cross request is coming from " + req.url);
-    allDatabase.findProductOrder().then(function(data){
+    allDatabase.findProductOrder(req.query.firebase_id).then(function(data){
         res.json(data);
     },function(err){
         res.json(err);
     })
+});
+exApp.get("/myCompaniesList",function(req,res){
+allDatabase.giveAllCompanyNames(req.query.firebasetoken).then(function(data){
+    res.send(data);
+},function(err){
+    res.send(err);
+})
+});
+exApp.post("/updateProductStock",function(req,res){
+    console.log("From /updateProductStock " + req.body.productStock);
+   allDatabase.updateProStock(req.body).then(function(data){
+       res.send(data);
+   },function(err){
+       res.send(err);
+   })
 });
 module.exports = exApp;

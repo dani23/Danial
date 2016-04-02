@@ -6,11 +6,31 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
-
 var paths = {
   sass: ['./scss/**/*.scss']
 };
+var replace = require('replace');
+var replaceFiles = ['./www/js/app.js'];
 
+gulp.task('add-proxy', function() {
+  return replace({
+    regex: "http://localhost:5013/api",
+    replacement: "http://localhost:8100",
+    paths: replaceFiles,
+    recursive: false,
+    silent: false,
+  });
+});
+
+gulp.task('remove-proxy', function() {
+  return replace({
+    regex: "http://localhost:8100",
+    replacement: "http://localhost:5013/api",
+    paths: replaceFiles,
+    recursive: false,
+    silent: false,
+  });
+});
 gulp.task('default', ['sass']);
 
 gulp.task('sass', function(done) {

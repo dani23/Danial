@@ -3,3 +3,17 @@
 <md-button class="md-raised md-warn" ng-click="getCurrSalesMan()">Salesman</md-button>
 <md-button class="md-raised md-warn" ng-click="goToProducts()">Products</md-button>
 <md-button class="md-raised md-warn" ng-click="logout()">Logout</md-button>
+<h2>Customer orders</h2>
+<table border="1" ng-repeat="ord in showOrders track by $index">
+    <tr>
+        <td>Customer name</td>
+        <td>Product</td>
+        <td>Product price</td>
+    </tr>
+    <tr ng-repeat="od in ord.customerOrderProduct track by $index">
+       <td>{{od.customer_name}}</td>
+        <td>{{od.proName}}</td>
+        <td>{{od.proPrice}}</td>
+    </tr>
+</table>
+<md-button class="md-raised md-warn" ng-click="saveOrders()">Save orders</md-button>

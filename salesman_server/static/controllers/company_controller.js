@@ -1,5 +1,5 @@
 angular.module("compCon",[])
-.controller("CompanyController",function($scope,$mdDialog,$rootScope,$http,$state,$stateParams){
+.controller("CompanyController",function($scope,$mdDialog,$rootScope,$http,$state){
         $scope.company = {
             company_name : "",
             company_address : "",
@@ -8,7 +8,7 @@ angular.module("compCon",[])
         $scope.addCompany = function(){
             $http.post("/api/saveCompany",$scope.company).success(function(data){
                 if(data){
-                    $state.go("getcpn",{_id : data});
+                    $state.go("getcpn",{comdata : data});
                 }
                 else{
                     console.log("Error in registering company " + data["error"])

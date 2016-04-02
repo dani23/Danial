@@ -1,11 +1,11 @@
 <h1>In dashboard</h1>
 <md-button class="md-raised md-warn" ng-click="logout()">Logout</md-button>
 <md-button class="md-raised md-warn" ng-click="createCompany()">Create company</md-button>
-<!--<ul>
-    <li ng-repeat="ord in showOrders">
-        <p ng-repeat="od in ord.customerOrderProduct">{{od}}</p>
+<ul>
+    <li ng-repeat="comDetail in companyList">
+        <a ng-click="goToComp(comDetail.companyName,comDetail.company_id)" href>{{comDetail.companyName}}</a>
     </li>
-</ul>-->
+</ul>
 <table border="1" ng-repeat="ord in showOrders">
     <tr>
         <td>Customer name</td>
