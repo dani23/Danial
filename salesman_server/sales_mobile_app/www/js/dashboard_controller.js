@@ -1,5 +1,45 @@
 angular.module("dashboa",[])
-.controller("DashboardController",function($scope,$state,$stateParams,$http,$ionicPopup,$firebaseArray,Apipoint){
+.controller("DashboardController",function($scope,$state,$stateParams,$http,$ionicPopup,$firebaseArray,Apipoint,$ionicPlatform,$cordovaGeolocation){
+    $ionicPlatform.ready(function(){$cordovaGeolocation.getCurrentPosition({enableHighAccuracy: false}).then(function(data){
+      console.log("The latitude is " + data.coords.latitude);
+      console.log("The longitude is " + data.coords.longitude);
+      $http({
+        method : "GET",
+        url : "https://maps.googleapis.com/maps/api/geocode/json",
+        params : {latlng : data.coords.latitude + "," + data.coords.longitude}
+      }).then(function(res){
+        console.log('Location is ' + res);
+        $scope.currentAddress = res.data.results[0].formatted_address;
+      },function(error){
+        console.log("Some thing went wrong " + error);
+      })
+    },function(err){
+      console.log("Error " + err);
+    });
+    /*var watch = $cordovaGeolocation.watchPosition({timeout : 600000,enableHighAccuracy : false});
+      watch.then(null,function(erro){
+      console.log("Error " + erro);
+    },function(dat){
+      console.log("The latitude is " + dat.coords.latitude);
+      console.log("The longitude is " + dat.coords.longitude);
+      $http({
+        method : "GET",
+        url : "https://maps.googleapis.com/maps/api/geocode/json",
+        params : {latlng : dat.coords.latitude + "," + dat.coords.longitude}
+      }).then(function(resp){
+        $scope.currentAddress = resp.dat.results[0].formatted_address;
+        $scope.Add = res;
+      },function(er){
+        console.log("Some thing went wrong " + er);
+      });
+    });
+      /!*$cordovaGeolocation.clearWatch(watch).then(function(cl){
+        console.log("cleared " + cl);
+      },function(el){
+        console.log("error " + el);
+      });*!/
+      watch.clearWatch();*/
+    });
     var product_orders = new Firebase("https://salesanapp-1.firebaseio.com/" + $stateParams.company_id);
     var userOrder = $firebaseArray(product_orders);
     $scope.quantityOfProduct = [];
@@ -34,7 +74,7 @@ angular.module("dashboa",[])
           }).then(function(res){
             if(res){
               $scope.quantityOfProduct.push(res);
-              $scope.customerOrder.addProducts.push({customer_name : $scope.customerOrder.customerName,proName : pro_name,proPrice : pro_price,proOrderQuantity : $scope.quantityOfProduct[$scope.quantityOfProduct.length - 1]})
+              $scope.customerOrder.addProducts.push({customer_name : $scope.customerOrder.customerName,proName : pro_name,proPrice : pro_price,proOrderQuantity : $scope.quantityOfProduct[$scope.quantityOfProduct.length - 1],salesmanLocation : $scope.currentAddress});
               $scope.productIds.push({_id : pro_id, productStock : pro_st, proOrderQuantity : $scope.quantityOfProduct[$scope.quantityOfProduct.length - 1]});
             }
           });
@@ -77,7 +117,7 @@ angular.module("dashboa",[])
             }).then(function(res){
               if(res){
                 $scope.quantityOfProduct.push(res);
-                $scope.customerOrder.addProducts.push({customer_name : $scope.customerOrder.customerName,proName : pro_name,proPrice : pro_price,proOrderQuantity : $scope.quantityOfProduct[$scope.quantityOfProduct.length - 1]});
+                $scope.customerOrder.addProducts.push({customer_name : $scope.customerOrder.customerName,proName : pro_name,proPrice : pro_price,proOrderQuantity : $scope.quantityOfProduct[$scope.quantityOfProduct.length - 1],salesmanLocation : $scope.currentAddress});
                 $scope.productIds.push({_id : pro_id, productStock : pro_st, proOrderQuantity : $scope.quantityOfProduct[$scope.quantityOfProduct.length - 1]});
               }
             })
@@ -106,5 +146,5 @@ angular.module("dashboa",[])
         localStorage.removeItem("company_id");
         $state.go("login");
       });
-    }
+    };
     })

@@ -4,9 +4,9 @@
  * provides you with the $firebase service which allows you to easily keep your $scope
  * variables in sync with your Firebase backend.
  *
- * AngularFire 1.1.4
+ * AngularFire 1.2.0
  * https://github.com/firebase/angularfire/
- * Date: 02/22/2016
+ * Date: 03/28/2016
  * License: MIT
  */
 (function(exports) {
@@ -1663,6 +1663,66 @@
 
 })();
 
+(function() {
+  "use strict";
+
+  function FirebaseAuthService($firebaseAuth, $firebaseRef) {
+    return $firebaseAuth($firebaseRef.default);
+  }
+  FirebaseAuthService.$inject = ['$firebaseAuth', '$firebaseRef'];
+
+  angular.module('firebase')
+    .factory('$firebaseAuthService', FirebaseAuthService);
+
+})();
+
+(function() {
+  "use strict";
+
+  function FirebaseRef() {
+    this.urls = null;
+    this.registerUrl = function registerUrl(urlOrConfig) {
+
+      if (typeof urlOrConfig === 'string') {
+        this.urls = {};
+        this.urls.default = urlOrConfig;
+      }
+
+      if (angular.isObject(urlOrConfig)) {
+        this.urls = urlOrConfig;
+      }
+
+    };
+
+    this.$$checkUrls = function $$checkUrls(urlConfig) {
+      if (!urlConfig) {
+        return new Error('No Firebase URL registered. Use firebaseRefProvider.registerUrl() in the config phase. This is required if you are using $firebaseAuthService.');
+      }
+      if (!urlConfig.default) {
+        return new Error('No default Firebase URL registered. Use firebaseRefProvider.registerUrl({ default: "https://<my-firebase-app>.firebaseio.com/"}).');
+      }
+    };
+
+    this.$$createRefsFromUrlConfig = function $$createMultipleRefs(urlConfig) {
+      var refs = {};
+      var error = this.$$checkUrls(urlConfig);
+      if (error) { throw error; }
+      angular.forEach(urlConfig, function(value, key) {
+        refs[key] = new Firebase(value);
+      });
+      return refs;
+    };
+
+    this.$get = function FirebaseRef_$get() {
+      return this.$$createRefsFromUrlConfig(this.urls);
+    };
+  }
+
+  angular.module('firebase')
+    .provider('$firebaseRef', FirebaseRef);
+
+})();
+
 'use strict';
 
 // Shim Array.indexOf for IE compatibility.
@@ -2256,7 +2316,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
           /**
            * AngularFire version number.
            */
-          VERSION: '1.1.4',
+          VERSION: '1.2.0',
 
           allPromises: $q.all.bind($q)
         };

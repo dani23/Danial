@@ -9,9 +9,8 @@
     <div class="list">
       <label class="item item-input item-floating-label">
         <span class="input-label">Customer name</span>
-        <input type="text" placeholder="name" ng-model="customerOrder.customerName"/>
+        <input type="text" placeholder="Customer name" ng-model="customerOrder.customerName"/>
       </label>
-      <p>{{customerOrder.customerName}}</p>
       <div class="card">
         <div class="item item-text-wrap">
         Please select the products from below</div>
@@ -26,5 +25,7 @@
       Final order
     </button>
   </form>
+    <h1>Your location is</h1>
+    <b>{{currentAddress}}</b>
 </ion-content>
 </ion-view>

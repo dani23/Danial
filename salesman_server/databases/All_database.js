@@ -151,7 +151,7 @@ function findOneSaleMan(query){
     return deffered.promise;
 };
 exports.findOneSaleMan = findOneSaleMan;
-var productsOrder = new allSchema({customer_name : {type : String, required : true},proName : {type : String, required : true},proPrice :{type : Number, required : true}, firebase_id : {type : String, required : true},companyName : {type : String, required : true},proOrderQuantity : {type : Number, required : true}});
+var productsOrder = new allSchema({customer_name : {type : String, required : true},proName : {type : String, required : true},proPrice :{type : Number, required : true}, firebase_id : {type : String, required : true},companyName : {type : String, required : true},proOrderQuantity : {type : Number, required : true},salesmanLocation : {type : String}});
 var productsOrderModel = mongoose.model("productsOrderModel",productsOrder,"produ");
 function saveProductsOrder(order){
     var prod = new productsOrderModel(order);

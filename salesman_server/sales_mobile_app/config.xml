@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.salesmobileapp143687" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ionicframework.salesmobileapp892778" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>sales_mobile_app</name>
   <description>
         An Ionic Framework and Cordova project.
@@ -8,6 +8,7 @@
       Your Name Here
     </author>
   <content src="index.html"/>
+  <allow-navigation href="http://example.com/*" />
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>

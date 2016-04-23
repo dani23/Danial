@@ -1,11 +1,14 @@
 angular.module("logn",[])
-.controller("LoginController",function($scope,$http,$state,Apipoint){
+.controller("LoginController",function($scope,$http,$state,Apipoint,Apiend){
         $scope.salemanData = {
             salemanName : "",
             salemanPassword : ""
         };
         $scope.login = function(){
-           Apipoint.getLogin($scope.salemanData).success(function(companyData){
+           var income = Apipoint.getLogin($scope.salemanData);
+          console.log("Income is " + income);
+          income.success(function(companyData){
+            console.log("companyData is " + companyData);
              if(companyData.success == "yes") {
                console.log("data is " + companyData.comData);
                console.log("company_id is " + companyData.comData.company_id);
@@ -16,4 +19,9 @@ angular.module("logn",[])
              }
            });
         };
+    $scope.ogp = function(){
+      $http.get(Apiend.url + "useful").success(function(data){
+        $scope.tex = data;
+      })
+    }
     })

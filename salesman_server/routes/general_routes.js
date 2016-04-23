@@ -3,13 +3,6 @@ var fire = require("firebase");
 var fireRef = new Firebase("https://salesanapp-1.firebaseio.com/users");
 var allDatabase = require("../databases/All_database.js");
 var exApp = ex.Router();
-exApp.use(function(req,res,next){
- res.append('Access-Control-Allow-Origin',req.headers.origin || '*');
- res.append('Access-Control-Allow-Credentials','true');
- res.append('Access-Control-Allow-Methods',['GET','OPTIONS','PUT','POST']);
- res.append('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
- next();
- });
 exApp.post("/signup",function(req,res){
    fireRef.createUser({
        email : req.body.email,
@@ -126,5 +119,8 @@ exApp.post("/updateProductStock",function(req,res){
    },function(err){
        res.send(err);
    })
+});
+exApp.get("*",function(req,res){
+    res.send("This request is not valid");
 });
 module.exports = exApp;

@@ -9,11 +9,13 @@
         <td>Customer name</td>
         <td>Product</td>
         <td>Product price</td>
+        <td>Salesman location</td>
     </tr>
     <tr ng-repeat="od in ord.customerOrderProduct track by $index">
        <td>{{od.customer_name}}</td>
         <td>{{od.proName}}</td>
         <td>{{od.proPrice}}</td>
+        <td>{{od.salesmanLocation}}</td>
     </tr>
 </table>
 <md-button class="md-raised md-warn" ng-click="saveOrders()">Save orders</md-button>
