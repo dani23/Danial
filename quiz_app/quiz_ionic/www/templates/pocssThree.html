@@ -1,0 +1,23 @@
+<ion-view view-title="Welcome to css practice quiz">
+    <ion-nav-bar class="bar-balanced"></ion-nav-bar>
+    <ion-content>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p ng-bind="cssQues3"></p>
+            </div>
+        </div>
+        <ion-list>
+            <ion-radio ng-repeat="opn in cssQues3Options track by $index" ng-click="subtAns(opn)">{{opn}}</ion-radio>
+        </ion-list>
+        <div class="row">
+            <div class="col text-right">
+                <button class="button button-calm" ng-click="goToQuesFour()">Next question</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-right">
+                <button class="button button-assertive" ng-click="quit('css practice')">Quit</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

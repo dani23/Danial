@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form method="post" action="/saveHtmlQuiz">
+<label>
+    Question<input type="text" name="Question"/>
+</label>
+    <label>
+        correct_answer<input type="text" name="correctAnswer"/>
+    </label>
+    <label>
+        question_number<input type="number" name="questionNumber"/>
+    </label>
+    <label>
+        <input type="text" name="htpqo_1"/>
+    </label>
+    <label>
+        <input type="text" name="htpqo_2"/>
+    </label>
+    <label>
+        <input type="text" name="htpqo_3"/>
+    </label>
+    <input type="submit"/>
+</form>
+<form method="get" action="/quizOfHtml">
+    <label>Question no <input type="number" name="questionNumber"/></label>
+    <input type="submit"/>
+</form>
+</body>
+</html>
