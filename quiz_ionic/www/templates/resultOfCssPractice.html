@@ -1,0 +1,20 @@
+<ion-view view-title="Result of css practice quiz">
+    <ion-nav-bar class="bar-balanced"></ion-nav-bar>
+    <ion-content>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p>You have secured {{cssPracPercentage}}%</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p ng-bind="cssPracRemarks"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-right">
+                <button class="button button-assertive" ng-click="quit('css practice')">Quit</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,20 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-calm">
+            <ion-nav-buttons>
+                <button class="button button-clear" menu-toggle="left">
+                  <span class="icon ion-navicon-round"></span>
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+      <ion-nav-view name="menu"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left">
+        <ion-content>
+            <div class="list card">
+                <a class="item" ui-sref="appStart.testOpt({options : 'practice'})" menu-close>Want to give practice quiz</a>
+                <a class="item" ui-sref="appStart.testOpt({options : 'time_quiz'})" menu-close>Want to give timed quiz</a>
+            </div>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

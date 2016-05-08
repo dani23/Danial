@@ -1,0 +1,22 @@
+<ion-view view-title="Welcome to html practice quiz">
+    <ion-content>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p ng-bind="ques4"></p>
+            </div>
+        </div>
+        <ion-list>
+            <ion-radio ng-repeat="op4 in option4 track by $index" ng-click="chkAns(op4)">{{op4}}</ion-radio>
+        </ion-list>
+        <div class="row">
+            <div class="col text-right">
+                <button class="button button-balanced" ng-click="finishHtmlPracQuiz()">Finish</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-right">
+                <button class="button button-assertive" ng-click="quit('html_practice')">Quit</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
